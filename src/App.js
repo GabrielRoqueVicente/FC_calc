@@ -44,12 +44,14 @@ class App extends Component {
     };
 
     render() {
-        const { currentOp, steps, op, wrong, correct, mistakes} = this.state;
+        const { currentOp, steps, op, level, wrong, correct, mistakes} = this.state;
         return (
             <div className="container">
                 <Menu
                     ops={OPS}
                     coefs={COEFS}
+                    opName={op}
+                    level={level}
                     onClick={this.getMenuFeedBack}
                 />
                 <Operation

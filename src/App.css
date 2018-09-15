@@ -14,3 +14,31 @@ body {
   margin:0 auto;
   width:100vmin;
 }
+
+.btn {
+  text-decoration:none;
+  display:table;
+  height:100%;
+  width:100%;
+  color:#333;
+  background-color:#DFF;
+  box-sizing: border-box;
+  border-radius:3px;
+  box-shadow: 0 2px #888;
+  -webkit-transition: background-color 200ms linear;
+  -ms-transition: background-color 200ms linear;
+  transition: background-color 200ms linear;
+}
+.btn span {
+  display:table-cell;
+  vertical-align:middle;
+  height:100%;
+}
+.btn:hover {
+  background-color:#EEE;
+}
+.btn:active {
+  background-color:#EEE;
+  box-shadow: 0 2px #888;
+  transform: translateY(1px);
+}

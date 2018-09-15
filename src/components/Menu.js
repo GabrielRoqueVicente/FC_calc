@@ -3,16 +3,24 @@ import PropTypes from 'prop-types'
 
 import './Menu.css'
 
-const Menu = ({ ops, coefs, onClick }) => (
+const Menu = ({ ops, opName, level, coefs, onClick }) => (
     <nav className="menu">
         <ul className="op">
             {ops.map((op, i)=>
-                <li key={`op${i}`} className={`btn ${op.value}`}  onClick={() => onClick(op.value)}>{op.char}</li>
+                <li
+                    key={`op${i}`}
+                    className={`btn ${op.value} ${op.value === opName ? 'active' :''}`}
+                    onClick={() => onClick(op.value)}>{op.char}
+                </li>
             )}
         </ul>
         <ul className="level">
             {coefs.map((coef, i)=>
-                <li key={`coef${i}`} className={`btn level${i+1}`}  onClick={() => onClick(coef)}>{i+1}</li>
+                <li
+                    key={`coef${i}`}
+                    className={`btn level${i+1}  ${i+1 === level ? 'active' :''}`}
+                    onClick={() => onClick(coef)}>{i+1}
+                </li>
             )}
         </ul>
     </nav>
@@ -20,6 +28,8 @@ const Menu = ({ ops, coefs, onClick }) => (
 
 Menu.prototype = {
     ops: PropTypes.array.isRequired,
+    op: PropTypes.string.isRequired,
+    level: PropTypes.number.isRequired,
     coefs: PropTypes.array.isRequired,
     onClick: PropTypes.func.isRequired,
 };
