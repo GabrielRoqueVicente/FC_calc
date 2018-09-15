@@ -20,20 +20,65 @@ const BUTTONS = 100;
 
 class App extends Component {
     state = {
+        steps: new Array(STEPS).fill({value: 'empty'}),
+        opType: 'multiplication',
+        level: 2,
         currentOp : {
             digit1: 0,
             opChar: 'x',
             digit2: 0,
+            result: 0,
         },
-        steps: new Array(STEPS).fill({value: 'empty'}),
-        op: 'multiplication',
-        level: 2,
         numbersEnabled: false,
         wrong: null,
         correct: null,
         mistakes: 0,
         currentStep: 0,
     };
+
+    getOp= () => {
+        const {level, opType} = this.state;
+        let [coef, digit1, opChar, digit2, result, currentOpType] = [COEFS[level],0,'x',0,0,''];
+
+        currentOpType = opType === 'mix' ?  OPS[Math.random() * OPS.length]: opType ;
+        switch(currentOpType) {
+            case 'multiplication' :
+                digit1= Math.floor(coef * (level === 1 ? Math.random() * 10 : 3 + Math.random() * 7));
+                digit2= Math.floor( 1 + Math.random() * 10 );
+                result= digit1 * digit2;
+                break;
+
+            case 'addition' :
+                digit1 = Math.floor(Math.floor( Math.random() * 99 )* coef);
+                digit2 = Math.floor(Math.floor( 1 + Math.random() * (99 - digit1))* coef);
+                result = digit1 + digit2;
+                break;
+
+            case 'soustraction' :
+                digit1 = Math.floor(Math.floor( 10 + Math.random() * 90 )* coef);
+                digit2 = Math.floor(Math.floor( Math.random() * digit1)* coef);
+                result = digit1 - digit2;
+                break;
+            default :
+                digit1 = 0;
+                digit2 = 0;
+                result = 0;
+                break
+        }
+        this.setState({
+            currentOp : {
+                digit1: digit1,
+                opChar: opChar,
+                digit2: digit2,
+                result: result,
+            }
+        });
+    };
+
+    componentDidMount() {
+        this.getOp()
+    }
+
 
     getNumbersFeedback = value =>{
         console.log(value);
@@ -44,20 +89,20 @@ class App extends Component {
     };
 
     render() {
-        const { currentOp, steps, op, level, wrong, correct, mistakes} = this.state;
+        const { currentOp, opType, steps, level, wrong, correct, mistakes} = this.state;
         return (
             <div className="container">
                 <Menu
                     ops={OPS}
                     coefs={COEFS}
-                    opName={op}
+                    opType={opType}
                     level={level}
                     onClick={this.getMenuFeedBack}
                 />
                 <Operation
                     steps={steps}
                     currentOp={currentOp}
-                    op={op}
+                    opType={opType}
                     wrong={wrong}
                     correct={correct}
                     mistakes={mistakes}
