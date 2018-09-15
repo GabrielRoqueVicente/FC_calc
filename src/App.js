@@ -4,11 +4,19 @@ import './App.css';
 
 import Operation from './components/Operation'
 import Numbers from "./components/Numbers";
+import Menu from "./components/Menu";
 
 
-// const OPS = ['multiplication', 'addition', 'soustraction', 'mix'];
+const OPS = [
+    {value: 'multiplication', char: 'x'},
+    {value: 'addition', char: '+'},
+    {value: 'soustraction', char: '-'},
+    {value: 'mix' , char: '?'}
+];
+const COEFS = [0.25, 0.6, 1];
 const STEPS = 20;
 const BUTTONS = 100;
+
 
 class App extends Component {
     state = {
@@ -31,25 +39,34 @@ class App extends Component {
         console.log(value);
     };
 
+    getMenuFeedBack = value =>{
+        console.log(value);
+    };
+
     render() {
-      const { currentOp, steps, op, wrong, correct, mistakes} = this.state;
-    return (
-        <div className="container">
-            <Operation
-                steps={steps}
-                currentOp={currentOp}
-                op={op}
-                wrong={wrong}
-                correct={correct}
-                mistakes={mistakes}
-            />
-            <Numbers
-                buttons={BUTTONS}
-                onClick={this.getNumbersFeedback}
-            />
-        </div>
-    );
-  }
+        const { currentOp, steps, op, wrong, correct, mistakes} = this.state;
+        return (
+            <div className="container">
+                <Menu
+                    ops={OPS}
+                    coefs={COEFS}
+                    onClick={this.getMenuFeedBack}
+                />
+                <Operation
+                    steps={steps}
+                    currentOp={currentOp}
+                    op={op}
+                    wrong={wrong}
+                    correct={correct}
+                    mistakes={mistakes}
+                />
+                <Numbers
+                    buttons={BUTTONS}
+                    onClick={this.getNumbersFeedback}
+                />
+            </div>
+        );
+    }
 }
 
 export default App;
