@@ -1,0 +1,28 @@
+.menu {
+    width:100%;
+    height:5%;
+}
+.menu ul {
+    margin:1% 0;
+    display:inline-block;
+    width:40%;
+    list-style:none;
+}
+.menu .level {
+    float:right;
+}
+.menu ul li {
+    cursor: pointer;
+    display:inline-block;
+    border-radius:3px;
+    width:20%;
+    text-align:center;
+    margin:0 1%;
+}
+.menu .btn {
+    font-size:3vh;
+}
+.menu .btn:active, .menu .btn.active {
+    background-color:#555;
+    color:#FFF;
+}
