@@ -1,0 +1,62 @@
+.numbers {
+    box-sizing:border-box;
+    padding: 4px;
+    height:70%;
+}
+.numbers table {
+    text-align:center;
+    width:100%;
+    height:100%;
+}
+.numbers table tr {
+    display: flex;
+}
+.numbers table td {
+    margin: 2px;
+    cursor: pointer;
+    padding: 0.4em 0;
+}
+
+
+.btn {
+    text-decoration:none;
+    display:table;
+    height:100%;
+    width:100%;
+    color:#333;
+    background-color:#DFF;
+    box-sizing: border-box;
+    border-radius:3px;
+    box-shadow: 0 2px #888;
+    -webkit-transition: background-color 200ms linear;
+    -ms-transition: background-color 200ms linear;
+    transition: background-color 200ms linear;
+}
+.btn span {
+    display:table-cell;
+    vertical-align:middle;
+    height:100%;
+}
+.btn:hover {
+    background-color:#EEE;
+}
+.btn:active {
+    background-color:#EEE;
+    box-shadow: 0 2px #888;
+    transform: translateY(1px);
+}
+.numbers .btn {
+    font-size:3vh;
+}
+.numbers .odd .btn {
+    background-color:#BDD;
+}
+.numbers table td.wrong {
+    background-color:#888;
+}
+table .ok, .text.ok, .step.ok {
+    background-color:#4F4 !important;
+}
+table .ko, .text.ko, .step.ko {
+    background-color:#F44 !important;
+}
