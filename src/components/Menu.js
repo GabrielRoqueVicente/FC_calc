@@ -19,7 +19,7 @@ const Menu = ({ ops, opType, level, coefs, onClick }) => (
                 <li
                     key={`coef${i}`}
                     className={`btn level${i+1}  ${i+1 === level ? 'active' :''}`}
-                    onClick={() => onClick(coef)}>{i+1}
+                    onClick={() => onClick(i+1)}>{i+1}
                 </li>
             )}
         </ul>

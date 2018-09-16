@@ -36,6 +36,10 @@ class App extends Component {
         currentStep: 0,
     };
 
+    componentDidMount() {
+        this.getOp()
+    }
+
     getOp= () => {
         const {level, opType} = this.state;
         let [coef, digit1, opChar, digit2, result, currentOpType] = [COEFS[level],0,'x',0,0,''];
@@ -44,18 +48,21 @@ class App extends Component {
         switch(currentOpType) {
             case 'multiplication' :
                 digit1= Math.floor(coef * (level === 1 ? Math.random() * 10 : 3 + Math.random() * 7));
+                opChar= '*';
                 digit2= Math.floor( 1 + Math.random() * 10 );
                 result= digit1 * digit2;
                 break;
 
             case 'addition' :
                 digit1 = Math.floor(Math.floor( Math.random() * 99 )* coef);
+                opChar= '+';
                 digit2 = Math.floor(Math.floor( 1 + Math.random() * (99 - digit1))* coef);
                 result = digit1 + digit2;
                 break;
 
             case 'soustraction' :
                 digit1 = Math.floor(Math.floor( 10 + Math.random() * 90 )* coef);
+                opChar= '-';
                 digit2 = Math.floor(Math.floor( Math.random() * digit1)* coef);
                 result = digit1 - digit2;
                 break;
@@ -65,19 +72,15 @@ class App extends Component {
                 result = 0;
                 break
         }
-        this.setState({
-            currentOp : {
-                digit1: digit1,
+        const nextOp = {
+            digit1: digit1,
                 opChar: opChar,
                 digit2: digit2,
                 result: result,
-            }
-        });
+        };
+        this.setState(
+            (prevState, currentOp) => ({currentOp: nextOp}))
     };
-
-    componentDidMount() {
-        this.getOp()
-    }
 
 
     getNumbersFeedback = value =>{
@@ -85,7 +88,17 @@ class App extends Component {
     };
 
     getMenuFeedBack = value =>{
-        console.log(value);
+        let state = null;
+        if(isNaN(value)){
+            state = {opType: value};
+            this.getOp();
+            this.setState(state);
+        }else{
+            state = {level: value};
+            this.getOp();
+            this.setState(state);
+        }
+
     };
 
     render() {
