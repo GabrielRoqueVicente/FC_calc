@@ -11,7 +11,7 @@ const OPS = [
     {value: 'multiplication', char: 'x'},
     {value: 'addition', char: '+'},
     {value: 'soustraction', char: '-'},
-    {value: 'mix' , char: '?'}
+    {value: 'mix', char: '?'},
 ];
 const COEFS = [0.25, 0.6, 1];
 const STEPS = 20;
@@ -42,9 +42,10 @@ class App extends Component {
 
     getOp= () => {
         const {level, opType} = this.state;
-        let [coef, digit1, opChar, digit2, result, currentOpType] = [COEFS[level],0,'x',0,0,''];
+        let [coef, digit1, opChar, digit2, result, currentOpType] = [COEFS[level-1],0,'x',0,0,''];
 
-        currentOpType = opType === 'mix' ?  OPS[Math.random() * OPS.length]: opType ;
+        currentOpType = opType === 'mix'?  OPS[Math.random() * OPS.length]: opType ;
+        console.log(currentOpType);
         switch(currentOpType) {
             case 'multiplication' :
                 digit1= Math.floor(coef * (level === 1 ? Math.random() * 10 : 3 + Math.random() * 7));
@@ -56,14 +57,14 @@ class App extends Component {
             case 'addition' :
                 digit1 = Math.floor(Math.floor( Math.random() * 99 )* coef);
                 opChar= '+';
-                digit2 = Math.floor(Math.floor( 1 + Math.random() * (99 - digit1))* coef);
+                digit2 = Math.floor( 1 + Math.random() * (99 - digit1));
                 result = digit1 + digit2;
                 break;
 
             case 'soustraction' :
                 digit1 = Math.floor(Math.floor( 10 + Math.random() * 90 )* coef);
                 opChar= '-';
-                digit2 = Math.floor(Math.floor( Math.random() * digit1)* coef);
+                digit2 = Math.floor( Math.random() * digit1);
                 result = digit1 - digit2;
                 break;
             default :
@@ -91,14 +92,10 @@ class App extends Component {
         let state = null;
         if(isNaN(value)){
             state = {opType: value};
-            this.getOp();
-            this.setState(state);
         }else{
             state = {level: value};
-            this.getOp();
-            this.setState(state);
         }
-
+        this.setState(state,this.getOp);
     };
 
     render() {

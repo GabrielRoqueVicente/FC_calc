@@ -10,7 +10,9 @@ const Menu = ({ ops, opType, level, coefs, onClick }) => (
                 <li
                     key={`op${i}`}
                     className={`btn ${op.value} ${op.value === opType ? 'active' :''}`}
-                    onClick={() => onClick(op.value)}>{op.char}
+                    onClick={() => onClick(op.value)}
+                >
+                    {op.char}
                 </li>
             )}
         </ul>
@@ -19,7 +21,9 @@ const Menu = ({ ops, opType, level, coefs, onClick }) => (
                 <li
                     key={`coef${i}`}
                     className={`btn level${i+1}  ${i+1 === level ? 'active' :''}`}
-                    onClick={() => onClick(i+1)}>{i+1}
+                    onClick={() => onClick(i+1)}
+                >
+                    {i+1}
                 </li>
             )}
         </ul>
